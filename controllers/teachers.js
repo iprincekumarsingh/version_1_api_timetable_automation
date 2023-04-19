@@ -128,14 +128,14 @@ exports.deleteTeacher = async (req, res) => {
 };
 
 exports.getTeacherByClass = async (req, res) => {
- 
-    const user = await Teacher.find({
-      classes:req.params.id
-    }).populate("user");
 
-    res.status(200).json({
-      status: "success",
-      user
-    });
- 
+  const user = await Teacher.find({
+    classes: req.params.id
+  }).populate("user");
+
+  res.status(200).json({
+    status: "success",
+    user
+  });
+
 }

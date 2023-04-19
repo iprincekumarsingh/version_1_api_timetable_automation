@@ -2,9 +2,11 @@ const time_slots = require("../models/slots");
 exports.createSlot = (req, res) => {
   const { time } = req.body;
 
+ 
+
   if(!time){
-    return res.status(401).json({
-      message: "Slot is required",
+    return res.status(400).json({
+      message: "Time is required"
     })
   }
   const slot = new time_slots({

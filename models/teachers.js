@@ -4,15 +4,19 @@ const teacherSchema = new mongoose.Schema({
   subject: {
     type: String,
     required: [true, "Please enter a subject"],
-    unique: false
+    unique: false,
   },
   classes: {
     type: String,
     required: [true, "Please enter a class"],
   },
+  // user: {
+  //   type: mongoose.Schema.ObjectId,
+  //   ref: "User",
+  // },
   user: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
+    type: String,
+    required: [true, "Please enter a name"],
   },
 });
 

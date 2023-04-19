@@ -106,3 +106,5 @@ exports.classSubjects = async (req, res) => {
     console.log(err);
   }
 };
+
+
