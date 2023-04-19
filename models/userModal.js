@@ -21,14 +21,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  //  create a array of subjects
-  subjectsassigned: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Subject",
-      default: [],
-    },
-  ],
 
   role: {
     type: String,

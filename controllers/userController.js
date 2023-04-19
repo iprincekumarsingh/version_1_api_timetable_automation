@@ -15,31 +15,32 @@ exports.createAccount = async (req, res) => {
 
     //  check if email is already registered
 
-    await User.findOne({ email }).then((data) => {
-      if (data) {
-        return res.status(400).json({
-          status: "fail",
-          message: "Email already registered",
-        });
-      }
+    const checkClass = await User.find({
+      email,
     });
+    if (checkClass.length > 0)
+      return res.status(400).json({
+        status: "fail",
+        message: "User already exists",
+      });
 
-    const user = User.create({
+    const user = new User({
       name,
-      email: email.toLowerCase(),
+      email,
       phone,
       password,
     });
-    const token = await user.generateToken();
 
-    password = undefined;
-
-    return res.status(200).send({
-      status: "success",
-      message: "Account created successfully",
-      user,
-      token,
+    user.save().then((data) => {
+      const token = user.generateToken();
+      return res.status(200).send({
+        status: "success",
+        message: "Account created successfully",
+        user,
+        token,
+      });
     });
+    password = undefined;
   } catch (err) {
     console.log(err);
   }
@@ -123,10 +124,8 @@ exports.teacherTimetable = async (req, res) => {
 };
 exports.profile = async (req, res) => {
   // get the user profile with the  subject name also
-  const user = await User.findById(req.user.id).populate("subjects");
+  const user = await User.findById(req.user.id);
   // access the subject name from the user
-
-  const subject = user.subjects.map((data) => data.name);
 
   return res.status(200).send({
     status: "success",
