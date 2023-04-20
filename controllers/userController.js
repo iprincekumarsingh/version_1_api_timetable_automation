@@ -6,7 +6,7 @@ exports.createAccount = async (req, res) => {
     const { name, email, phone, password } = req.body;
     // check if fields are empty or not
 
-    if (!name || !email || !phone || !password) {
+    if (!name || !email  || !password) {
       return res.status(400).send({
         status: "fail",
         message: "Please fill all the fields",
@@ -27,7 +27,7 @@ exports.createAccount = async (req, res) => {
     const user = new User({
       name,
       email,
-      phone,
+      phone:"not provided",
       password,
     });
 
